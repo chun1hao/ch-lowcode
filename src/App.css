@@ -1,0 +1,4 @@
+.monaco-editor .suggest-widget {
+  max-width: 300px !important;
+  left: 70px !important;
+}
