@@ -14,6 +14,15 @@ import FormEdit from "../materials/Form/edit";
 import FormPreview from "../materials/Form/preview";
 import FormItem from "../materials/Form/formItem";
 import Text from "../materials/Text/index";
+import {
+  BlockOutlined,
+  BorderOutlined,
+  ContainerOutlined,
+  FileTextOutlined,
+  FormOutlined,
+  TableOutlined,
+} from "@ant-design/icons";
+import React from "react";
 
 export interface ComponentSetter {
   name: string;
@@ -38,8 +47,11 @@ export interface ComponentConfig {
   desc: string;
   setter?: ComponentSetter[]; // 设置区-属性
   stylesSetter?: ComponentSetter[]; // 设置区-样式
+  icon?: React.FunctionComponent;
   edit: any;
   preview: any;
+  level: number;
+  levelName: string;
   events?: ComponentEvent[];
   methods?: ComponentMethod[];
   [key: string]: unknown;
@@ -62,11 +74,16 @@ export const useComponentConfigStore = create<State & Action>((set) => {
         edit: PageEdit,
         preview: PagePreview,
         desc: "页面",
+        level: 0,
+        levelName: "页面",
       },
       Container: {
         name: "Container",
         defaultProps: {},
         desc: "容器",
+        icon: ContainerOutlined,
+        level: 1,
+        levelName: "通用",
         stylesSetter: [
           {
             name: "width",
@@ -87,7 +104,10 @@ export const useComponentConfigStore = create<State & Action>((set) => {
         defaultProps: {
           text: "这里是一段文本",
         },
+        level: 1,
+        levelName: "通用",
         desc: "文本",
+        icon: FileTextOutlined,
         setter: [
           {
             name: "text",
@@ -117,6 +137,9 @@ export const useComponentConfigStore = create<State & Action>((set) => {
           text: "按钮",
         },
         desc: "按钮",
+        level: 1,
+        levelName: "通用",
+        icon: BorderOutlined,
         setter: [
           {
             name: "type",
@@ -162,6 +185,9 @@ export const useComponentConfigStore = create<State & Action>((set) => {
           okText: "确认",
           cancelText: "取消",
         },
+        level: 1,
+        levelName: "通用",
+        icon: BlockOutlined,
         setter: [
           {
             name: "title",
@@ -215,6 +241,9 @@ export const useComponentConfigStore = create<State & Action>((set) => {
             type: "input",
           },
         ],
+        level: 2,
+        levelName: "表格",
+        icon: TableOutlined,
         edit: TableEdit,
         preview: TablePreview,
       },
@@ -226,6 +255,9 @@ export const useComponentConfigStore = create<State & Action>((set) => {
           title: "列名",
           type: "text",
         },
+        level: 2,
+        levelName: "表格",
+        icon: TableOutlined,
         setter: [
           {
             name: "title",
@@ -259,7 +291,10 @@ export const useComponentConfigStore = create<State & Action>((set) => {
       Form: {
         name: "Form",
         defaultProps: {},
-        desc: "表单",
+        desc: "表单容器",
+        icon: FormOutlined,
+        level: 3,
+        levelName: "表单",
         setter: [
           {
             name: "title",
@@ -285,6 +320,9 @@ export const useComponentConfigStore = create<State & Action>((set) => {
       FormItem: {
         name: "FormItem",
         desc: "表单项",
+        icon: FormOutlined,
+        level: 3,
+        levelName: "表单",
         defaultProps: {
           uuid: "name",
           label: "测试",
