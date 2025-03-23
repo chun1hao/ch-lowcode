@@ -1,8 +1,10 @@
+import { Button } from "antd";
 import { useDrag } from "react-dnd";
 
 export interface MaterialItemProps {
   name: string;
   desc: string;
+  icon?: React.FunctionComponent;
 }
 
 export function MaterialItem(props: MaterialItemProps) {
@@ -15,20 +17,10 @@ export function MaterialItem(props: MaterialItemProps) {
     },
   });
   return (
-    <div
-      ref={drag}
-      className="
-            border-dashed
-            rounded-[6px]
-            border-[1px]
-            border-[#000]
-            py-[4px] px-[6px] 
-            cursor-move
-            bg-white
-            hover:bg-[#ccc]
-        "
-    >
-      {props.desc}
+    <div ref={drag}>
+      <Button size="small" className="cursor-move" icon={props.icon ? <props.icon /> : ""}>
+        {props.desc}
+      </Button>
     </div>
   );
 }

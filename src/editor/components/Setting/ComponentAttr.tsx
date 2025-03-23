@@ -25,7 +25,7 @@ export function ComponentAttr() {
     form.resetFields();
     const data = form.getFieldsValue();
     const props = { ...curComponent?.props };
-    if (props.uuid) {
+    if (props.uuid && !props.dataIndex && !props.name) {
       props[props.uuid] = generateRandomString();
     }
     const newData = { ...data, ...props };

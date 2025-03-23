@@ -1,21 +1,33 @@
-import { Segmented } from "antd";
+import { Tabs, TabsProps } from "antd";
 import { useState } from "react";
 import { Material } from "./Material";
 import { Outline } from "./Outline";
 import { SourceCode } from "./SourceCode";
 import { LEFT_WRAPPER } from "../../../config";
 
+const itemConfig = [
+  { key: "1", label: "物料", Component: Material },
+  { key: "2", label: "大纲", Component: Outline },
+  { key: "3", label: "源码", Component: SourceCode },
+];
+const items: TabsProps["items"] = itemConfig.map((item) => {
+  return {
+    key: item.key,
+    label: item.label,
+    children: (
+      <div className="h-[calc(100vh-100px)]">
+        <item.Component />
+      </div>
+    ),
+  };
+});
+
 export function LeftWrapper() {
-  const [key, setKey] = useState<string>("物料");
+  const [key, setKey] = useState("1");
 
   return (
     <div className={LEFT_WRAPPER}>
-      <Segmented value={key} onChange={setKey} block options={["物料", "大纲", "源码"]} />
-      <div className="pt-[10px] h-[calc(100vh-100px)]">
-        {key === "物料" && <Material />}
-        {key === "大纲" && <Outline />}
-        {key === "源码" && <SourceCode />}
-      </div>
+      <Tabs centered activeKey={key} items={items} onChange={setKey} />
     </div>
   );
 }

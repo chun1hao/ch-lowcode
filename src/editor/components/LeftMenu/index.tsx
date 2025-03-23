@@ -11,7 +11,7 @@ interface IMenuProps {
 
 const items: MenuItem[] = [
   { key: "1", icon: <PieChartOutlined />, label: "物料" },
-  { key: "2", icon: <DesktopOutlined />, label: "画布" },
+  { key: "2", icon: <DesktopOutlined />, label: "画布", disabled: true },
   { key: "3", icon: <SettingOutlined />, label: "设置" },
 ];
 
