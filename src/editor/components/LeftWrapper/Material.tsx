@@ -1,5 +1,8 @@
 import { useMemo, useState } from "react";
-import { ComponentConfig, useComponentConfigStore } from "../../stores/component-config";
+import {
+  ComponentConfig,
+  useComponentConfigStore,
+} from "../../stores/component-config";
 import { MaterialItem } from "../MaterialItem";
 import { Collapse } from "antd";
 
@@ -12,7 +15,10 @@ export function Material() {
     const map = new Map();
     Object.values(componentConfig).forEach((component) => {
       if (component.name !== "Page") {
-        map.set(component.level, (map.get(component.level) || []).concat(component));
+        map.set(
+          component.level,
+          (map.get(component.level) || []).concat(component)
+        );
       }
     });
     return Array.from(map.values()).map((item: ComponentConfig[], idx) => {
@@ -43,7 +49,7 @@ export function Material() {
       expandIconPosition="end"
       activeKey={activeKey}
       ghost
-      onChange={setActiveKey}
+      onChange={(v: string | string[]) => setActiveKey(v as string[])}
     />
   );
 }
